@@ -98,18 +98,18 @@ public class B01 {
 	public static void main(String args[]){
 		
 		//System.out.println(Luhn.getDigitsArray("12774212857X4109"));
-		System.out.println(Luhn.run("36X0002030416468"));
-		System.out.println("------OVER--------------------------");
+		//System.out.println(Luhn.run("36X0002030416468"));
+		//System.out.println("------OVER--------------------------");
 		Scanner scan = new Scanner(System.in);
 		String output = "";
-//		try {
-//			for (String line : Files.readAllLines(Paths.get("list.txt"))) {
-//			    output = output + Luhn.run(line);
-//			}
-//			System.out.println("Output: "+output);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			for (String line : Files.readAllLines(Paths.get("list.txt"))) {
+			    output = output + Luhn.run(line);
+			}
+			System.out.println("Output: "+output);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
