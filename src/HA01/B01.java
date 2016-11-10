@@ -2,6 +2,7 @@ package HA01;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class B01 {
@@ -30,48 +31,69 @@ public class B01 {
 			return temp;
 		}
 		
-		public static void run(String str){
+		public static void run(String[] s){
+			for(int i = 0; i<s.length; i++){
+				run(s[i]);
+			}
+		}
+		
+		
+		public static String run(String str){
 			List<Integer> l = getDigitsArray(str);
+			//System.out.println(l);
 			List<Integer> odd = new ArrayList<Integer>();
 			int sum = 0;
-			boolean alt = true;
+			boolean isTimeToDouble = false;
+			boolean xWasDoubled = false;
 			for(int i = l.size()-1; i >= 0; i--){
+				int tempRes = 0;
+				//System.out.println("Found '"+l.get(i)+"' at index '"+i+"', and double bool is: "+isTimeToDouble);
 				if(l.get(i) == 33){
-					l.set(i, 0);
+					l.set(i, 0); //unneeded?
+					if(isTimeToDouble){
+						xWasDoubled = true;
+					}
 				}
-				else if (alt){
+				else if (isTimeToDouble){
 					int temp = l.get(i)*2;
 					if(temp > 9){
 						List<Integer> subl = getDigitsArray(temp);
+						temp = 0;
 						for(int j = 0; j<subl.size(); j++){
 							sum = sum+subl.get(j);
+							temp = temp+subl.get(j);
 						}
 					}
 					else{
 						sum = sum + temp;
 					}
+					tempRes = temp;
 				}
 				else{
 					sum = sum + l.get(i);
+					tempRes = l.get(i);
 				}
-				alt = !alt;
+				isTimeToDouble = !isTimeToDouble;
+				//System.out.println("Turned into '"+tempRes+"'");
+				//System.out.println("----------------------------");
 			}
 			int x = 0;
 			for(int i = 0; i < 10; i++){
+				x = i;
+				if(xWasDoubled){
+					i=i*2;
+					if(i>9){
+						i = i - 9;
+					}
+				}
 				if( (sum+i)%10 == 0 ){
-					x = i;
 					break;
 				}
 			}
-			if(x%2 == 0){ //even
-				x = x/2;
-			}
-			else{
-				x = 10+(x-1)/2;
-			}
-			System.out.println("Sum: "+sum);
-			System.out.println("Real x: "+x);
-			System.out.println("------------------");
+			//System.out.println("Sum without X: "+sum);
+			System.out.println(x);
+			return Integer.toString(x);
+			//System.out.println("------------------");
 			
 		}
 	}
@@ -79,11 +101,14 @@ public class B01 {
 	public static void main(String args[]){
 		
 		//System.out.println(Luhn.getDigitsArray("12774212857X4109"));
-		Luhn.run("12774212857X4109");
-		Luhn.run("586604X108627571");
-		Luhn.run("7473X86953606632");
-		Luhn.run("4026467X45830632");
-		Luhn.run("20X3092648604969");
+		//Luhn.run("12774212857X4109");
+		Scanner scan = new Scanner(System.in);
+		String output = "";
+		while(true){
+			String s = scan.nextLine();
+			output = output + Luhn.run(s);
+			System.out.println("Output: "+output);
+		}
 		
 	}
 
