@@ -51,36 +51,28 @@ public class B01 {
 			boolean isTimeToDouble = false;
 			boolean xWasDoubled = false;
 			for(int i = l.size()-1; i >= 0; i--){
-				int tempRes = 0;
-				//System.out.println("Found '"+l.get(i)+"' at index '"+i+"', and double bool is: "+isTimeToDouble);
+				int whatWeTurnTheDigitInto = 0;
+				System.out.println("Found '"+l.get(i)+"' at index '"+i+"', and double bool is: "+isTimeToDouble);
 				if(l.get(i) == 33){
-					l.set(i, 0); //unneeded?
-					if(isTimeToDouble){
-						xWasDoubled = true;
-					}
+					xWasDoubled = isTimeToDouble;
 				}
 				else if (isTimeToDouble){
-					int temp = l.get(i)*2;
-					if(temp > 9){
-						List<Integer> subl = getDigitsArray(temp);
-						temp = 0;
-						for(int j = 0; j<subl.size(); j++){
-							sum = sum+subl.get(j);
-							temp = temp+subl.get(j);
-						}
+					int digitToDouble = l.get(i)*2;
+					if(digitToDouble > 9){
+						sum = sum + sumDigits(getDigitsArray(digitToDouble));
 					}
 					else{
-						sum = sum + temp;
+						sum = sum + digitToDouble;
 					}
-					tempRes = temp;
+					whatWeTurnTheDigitInto = digitToDouble;
 				}
 				else{
 					sum = sum + l.get(i);
-					tempRes = l.get(i);
+					whatWeTurnTheDigitInto = l.get(i);
 				}
 				isTimeToDouble = !isTimeToDouble;
-				//System.out.println("Turned into '"+tempRes+"'");
-				//System.out.println("----------------------------");
+				System.out.println("Turned into '"+whatWeTurnTheDigitInto+"'");
+				System.out.println("----------------------------");
 			}
 			int x = 0;
 			for(int i = 0; i < 10; i++){
@@ -106,22 +98,18 @@ public class B01 {
 	public static void main(String args[]){
 		
 		//System.out.println(Luhn.getDigitsArray("12774212857X4109"));
-		//Luhn.run("12774212857X4109");
+		System.out.println(Luhn.run("36X0002030416468"));
+		System.out.println("------OVER--------------------------");
 		Scanner scan = new Scanner(System.in);
 		String output = "";
-		try {
-			for (String line : Files.readAllLines(Paths.get("list.txt"))) {
-			    output = output + Luhn.run(line);
-			}
-			System.out.println("Output: "+output);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		//while(true){
-		//	String s = scan.nextLine();
-		//	output = output + Luhn.run(s);
-		//	System.out.println("Output: "+output);
-		//}
+//		try {
+//			for (String line : Files.readAllLines(Paths.get("list.txt"))) {
+//			    output = output + Luhn.run(line);
+//			}
+//			System.out.println("Output: "+output);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
 	}
 
