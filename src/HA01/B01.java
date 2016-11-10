@@ -1,5 +1,10 @@
 package HA01;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -104,11 +109,19 @@ public class B01 {
 		//Luhn.run("12774212857X4109");
 		Scanner scan = new Scanner(System.in);
 		String output = "";
-		while(true){
-			String s = scan.nextLine();
-			output = output + Luhn.run(s);
+		try {
+			for (String line : Files.readAllLines(Paths.get("list.txt"))) {
+			    output = output + Luhn.run(line);
+			}
 			System.out.println("Output: "+output);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		//while(true){
+		//	String s = scan.nextLine();
+		//	output = output + Luhn.run(s);
+		//	System.out.println("Output: "+output);
+		//}
 		
 	}
 
