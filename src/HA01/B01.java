@@ -46,7 +46,7 @@ public class B01 {
 		public static String run(String str){
 			List<Integer> l = getDigitsArray(str);
 			//System.out.println(l);
-			List<Integer> odd = new ArrayList<Integer>();
+			//List<Integer> odd = new ArrayList<Integer>();
 			int sum = 0;
 			boolean isTimeToDouble = false;
 			boolean xWasDoubled = false;
@@ -57,14 +57,14 @@ public class B01 {
 					xWasDoubled = isTimeToDouble;
 				}
 				else if (isTimeToDouble){
-					int digitToDouble = l.get(i)*2;
-					if(digitToDouble > 9){
-						sum = sum + sumDigits(getDigitsArray(digitToDouble));
+					int digitWeDoubled = l.get(i)*2;
+					if(digitWeDoubled > 9){
+						sum = sum + (digitWeDoubled-9);//sumDigits(getDigitsArray(digitToDouble));
 					}
 					else{
-						sum = sum + digitToDouble;
+						sum = sum + digitWeDoubled;
 					}
-					whatWeTurnTheDigitInto = digitToDouble;
+					whatWeTurnTheDigitInto = digitWeDoubled;
 				}
 				else{
 					sum = sum + l.get(i);
@@ -75,34 +75,44 @@ public class B01 {
 				System.out.println("----------------------------");
 			}
 			int x = 0;
+			int temp = 0;
 			for(int i = 0; i < 10; i++){
 				x = i;
 				if(xWasDoubled){
-					i=i*2;
-					if(i>9){
-						i = i - 9;
+					temp=i*2;
+					if(temp>9){
+						temp = temp - 9;
 					}
 				}
-				if( (sum+i)%10 == 0 ){
+				else{
+					temp = i;
+				}
+				if( (sum+temp)%10 == 0 ){
 					break;
 				}
 			}
+//			for(int i = 0; i<10; i++){
+//				
+//			}
 			//System.out.println("Sum without X: "+sum);
 			System.out.println(x);
 			return Integer.toString(x);
 			//System.out.println("------------------");
 			
 		}
+		
+		
 	}
 	
 	public static void main(String args[]){
 		
 		//System.out.println(Luhn.getDigitsArray("12774212857X4109"));
-		//System.out.println(Luhn.run("36X0002030416468"));
+		System.out.println(Luhn.run("36X0002030416468"));
 		//System.out.println("------OVER--------------------------");
 		Scanner scan = new Scanner(System.in);
 		String output = "";
 		try {
+		
 			for (String line : Files.readAllLines(Paths.get("list.txt"))) {
 			    output = output + Luhn.run(line);
 			}
@@ -112,5 +122,9 @@ public class B01 {
 		}
 		
 	}
+	
+	//5496331440914992338434701218071555719657419448245128019889398009532562488698540071959143506293615978 rätt
+	//5496331440914992338434701919071999719657419448249198019899398009932562488699940071959143506993619978 igår
+	//5776331440914772338437701717071777717657719478277178017879398009732562488697770071957143507773617978 idag
 
 }
