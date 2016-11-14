@@ -15,7 +15,7 @@ public class B02 {
 	 * k = nbr of collisions needed
 	 * c = nbr of coins before finished
 	 */
-	public int run(int u, int k, int c){
+	public double run(int u, int k, int c){
 		int nbrBins = (int) Math.pow(2, u);
 //		System.out.println("2^u: "+nbrBins);
 		
@@ -23,7 +23,7 @@ public class B02 {
 		Random rand = new Random();
 		
 		int generatedCoins = 0;
-		int ballsThrown = 0;
+		double ballsThrown = 0;
 		
 		while(generatedCoins < c){
 			int currentIndex = rand.nextInt(nbrBins);
@@ -40,23 +40,23 @@ public class B02 {
 		return ballsThrown;
 	}
 	 
-	private double calcDeviation(ArrayList<Integer> array, double mean){
+	private double calcDeviation(ArrayList<Double> array, double mean){
 		double sum = 0;
-		for (int element : array) {
+		for (double element : array) {
 		    sum = sum + Math.pow(( (double) element ) - mean, 2);
 		}
 		return Math.sqrt(sum/array.size());
 	}
 	
 	private void startSimulation(int runsBeforeEval, int coinTarget, double desiredWidth, int u, int k){
-		int sum = 0;
-		ArrayList<Integer> list = new ArrayList();
+		double sum = 0;
+		ArrayList<Double> list = new ArrayList();
 		double runsSoFar = 0;
 		double currentWidth = 0;
 		double currentMean = 0;
 		do{
 			for(int i=0; i<runsBeforeEval; i++){
-				int res = run(u, k, coinTarget);
+				double res = run(u, k, coinTarget);
 				list.add( res );
 				sum = sum + res;
 				runsSoFar++;
@@ -78,8 +78,9 @@ public class B02 {
 		
 		long startTime = System.currentTimeMillis();
 		
-		int desiredWidth = 1000;
+		int desiredWidth = 311;
 		//runsBeforeEval, coinTarget, desiredWidth, u, k
+		//test.startSimulation(2, 10000, desiredWidth, 20, 7);
 		test.startSimulation(2, 10000, desiredWidth, 20, 7);
 		System.out.println("Time elapsed: "+(System.currentTimeMillis()-startTime));
 		
