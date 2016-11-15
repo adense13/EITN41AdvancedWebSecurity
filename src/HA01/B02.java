@@ -22,7 +22,7 @@ public class B02 {
 		int[] bins = new int[nbrBins];
 		Random rand = new Random();
 		
-		int generatedCoins = 0;
+		double generatedCoins = 0;
 		double ballsThrown = 0;
 		
 		while(generatedCoins < c){
@@ -43,7 +43,7 @@ public class B02 {
 	private double calcDeviation(ArrayList<Double> array, double mean){
 		double sum = 0;
 		for (double element : array) {
-		    sum = sum + Math.pow(( (double) element ) - mean, 2);
+		    sum = sum + Math.pow(( element ) - mean, 2);
 		}
 		return Math.sqrt(sum/array.size());
 	}
@@ -60,13 +60,14 @@ public class B02 {
 				list.add( res );
 				sum = sum + res;
 				runsSoFar++;
+				
 			}
 			currentMean = sum/list.size();
 			//System.out.println("CurrentMean: "+currentMean);
 			double lambda = 3.66;
 			double stdDeviation = calcDeviation(list, currentMean);
 			//System.out.println("StandardDeviation: "+stdDeviation);
-			currentWidth = lambda * (stdDeviation/Math.sqrt(runsSoFar));
+			currentWidth = 2 * lambda * (stdDeviation/Math.sqrt(runsSoFar));
 			//System.out.println("CurrentWidth: "+currentWidth);
 		}while (currentWidth > desiredWidth);
 		
@@ -81,7 +82,7 @@ public class B02 {
 		int desiredWidth = 311;
 		//runsBeforeEval, coinTarget, desiredWidth, u, k
 		//test.startSimulation(2, 10000, desiredWidth, 20, 7);
-		test.startSimulation(2, 10000, desiredWidth, 20, 7);
+		test.startSimulation(20, 10000, desiredWidth, 20, 7);
 		System.out.println("Time elapsed: "+(System.currentTimeMillis()-startTime));
 		
 		
