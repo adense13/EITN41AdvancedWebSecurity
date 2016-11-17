@@ -21,6 +21,7 @@ public class Consumer {
 	public void generateQuadruples(int k){
 		for(int i = 0; i < 2*k; i++){
 			quadList.add(new Quadruple(i));
+			System.out.println(quadList.get(i));
 		}
 	}
 	
