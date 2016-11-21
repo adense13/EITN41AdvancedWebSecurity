@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class DC {
 	
-	public BitSet mySecret, leftNeighborSecret;
+	public BitSet mySecret, leftNeighborSecret, myAnswer;
 	
 	public BitSet create16BitSecret(){
 		BitSet bits = new BitSet();
@@ -32,6 +32,7 @@ public class DC {
 	public BitSet answerTrue(){ //XOR
 		BitSet xorSet = mySecret;
 		xorSet.xor(leftNeighborSecret);
+		myAnswer = xorSet;
 		return xorSet;
 	}
 	public BitSet answerFalse(){ //Opposite of XOR
@@ -39,6 +40,7 @@ public class DC {
 		for(int i = 0; i<xorSet.length(); i++){
 			xorSet.flip(i);
 		}
+		myAnswer = xorSet;
 		return xorSet;
 	}
 	
