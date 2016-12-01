@@ -79,10 +79,10 @@ public class B02 {
 		
 		long startTime = System.currentTimeMillis();
 		
-		int desiredWidth = 311;
+		int desiredWidth = 7868;
 		//runsBeforeEval, coinTarget, desiredWidth, u, k
 		//test.startSimulation(2, 10000, desiredWidth, 20, 7);
-		test.startSimulation(20, 10000, desiredWidth, 20, 7);
+		test.startSimulation(20, 100, desiredWidth, 19, 7);
 		System.out.println("Time elapsed: "+(System.currentTimeMillis()-startTime));
 		
 		
